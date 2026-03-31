@@ -1,11 +1,13 @@
 require('dotenv').config();
 
 const express = require('express');
+const fetchAgents = require('./data/agents-list');
 const app = express();
 
 app.use(express.json());
 
 const port = process.env.PORT || 3000;
+let agents = [];
 
 // GET /hello endpoint
 app.get('/hello', (req, res) => {
@@ -35,7 +37,21 @@ app.get('/error', (req, res) => {
   }
 });
 
+// GET /email-list endpoint
+app.get('/email-list', (req, res) => {
+  try {
+    const emailList = agents.map(agent => agent.email).join(',');
+    res.status(200).send(emailList);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 // Server startup
+fetchAgents()
+  .then(data => { agents = data })
+  .catch(err => { console.error('Failed to load agents:', err); process.exit(1) });
+
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
