@@ -2,6 +2,7 @@ require('dotenv').config();
 
 const express = require('express');
 const fetchAgents = require('./data/agents-list');
+const { calcResidential, tierPricing } = require('./data/calcul');
 const app = express();
 
 app.use(express.json());
@@ -58,6 +59,35 @@ app.get('/region-avg', (req, res) => {
     const avg_rating = parseFloat((filtered.reduce((sum, a) => sum + a.rating, 0) / filtered.length).toFixed(2));
     const avg_fee = parseFloat((filtered.reduce((sum, a) => sum + a.fee, 0) / filtered.length).toFixed(2));
     return res.status(200).json({ region, avg_rating, avg_fee });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// GET /calc-residential endpoint
+app.get('/calc-residential', (req, res) => {
+  try {
+    const { number_of_apartments, number_of_floors, tier } = req.query;
+    const validTiers = ['standard', 'premium', 'excelium'];
+
+    if (!validTiers.includes(tier)) {
+      return res.status(400).json({ error: "Invalid tier. Must be standard, premium, or excelium." });
+    }
+
+    if (!number_of_apartments || !number_of_floors || isNaN(number_of_apartments) || isNaN(number_of_floors)) {
+      return res.status(400).json({ error: "number_of_apartments and number_of_floors must be numbers." });
+    }
+
+    if (!Number.isInteger(Number(number_of_apartments)) || !Number.isInteger(Number(number_of_floors))) {
+      return res.status(400).json({ error: "number_of_apartments and number_of_floors must be integers." });
+    }
+
+    if (Number(number_of_apartments) <= 0 || Number(number_of_floors) <= 0) {
+      return res.status(400).json({ error: "number_of_apartments and number_of_floors must be greater than zero." });
+    }
+
+    const result = calcResidential(Number(number_of_apartments), Number(number_of_floors), tier);
+    return res.status(200).json(result);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
