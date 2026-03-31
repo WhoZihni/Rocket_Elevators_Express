@@ -47,6 +47,22 @@ app.get('/email-list', (req, res) => {
   }
 });
 
+// GET /region-avg endpoint
+app.get('/region-avg', (req, res) => {
+  try {
+    const region = req.query.region;
+    const filtered = agents.filter(a => a.region.toLowerCase() === region.toLowerCase());
+    if (filtered.length === 0) {
+      return res.status(200).json({ message: "No agents found in this region." });
+    }
+    const avg_rating = parseFloat((filtered.reduce((sum, a) => sum + a.rating, 0) / filtered.length).toFixed(2));
+    const avg_fee = parseFloat((filtered.reduce((sum, a) => sum + a.fee, 0) / filtered.length).toFixed(2));
+    return res.status(200).json({ region, avg_rating, avg_fee });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 // Server startup
 fetchAgents()
   .then(data => { agents = data })
