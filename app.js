@@ -26,6 +26,15 @@ app.get('/status', (req, res) => {
   }
 });
 
+// GET /error endpoint
+app.get('/error', (req, res) => {
+  try {
+    throw new Error('Something went wrong');
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 // Server startup
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
