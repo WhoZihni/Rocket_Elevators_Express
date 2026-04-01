@@ -93,6 +93,20 @@ app.get('/calc-residential', (req, res) => {
   }
 });
 
+// POST /contact-us endpoint
+app.post('/contact-us', (req, res) => {
+  try {
+    const { first_name, last_name, message } = req.body;
+    const response = {
+      message: `Message received from ${first_name} ${last_name}`
+    };
+    console.log(response);
+    res.status(200).json(response);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 // Server startup
 fetchAgents()
   .then(data => { agents = data })
