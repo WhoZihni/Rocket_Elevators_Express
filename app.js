@@ -10,7 +10,15 @@ app.use(express.json());
 const port = process.env.PORT || 3000;
 let agents = [];
 
-// GET /hello endpoint
+/**
+ * GET /hello
+ * Endpoint: Returns a simple greeting message and logs the port number to console.
+ * Method: GET
+ * Route: /hello
+ * Parameters: None
+ * Response: 200 - Plain text string "Hello World!"
+ * Error Handling: Returns 500 with JSON error object on failure
+ */
 app.get('/hello', (req, res) => {
   try {
     console.log(`Port in use: ${port}`);
@@ -20,7 +28,15 @@ app.get('/hello', (req, res) => {
   }
 });
 
-// GET /status endpoint
+/**
+ * GET /status
+ * Endpoint: Returns the current server status including port and environment name.
+ * Method: GET
+ * Route: /status
+ * Parameters: None
+ * Response: 200 - JSON object with message containing PORT and ENV_NAME from .env
+ * Error Handling: Returns 500 with JSON error object on failure
+ */
 app.get('/status', (req, res) => {
   try {
     res.status(200).json({ message: `Server running on port ${process.env.PORT} in ${process.env.ENV_NAME} mode` });
@@ -29,7 +45,15 @@ app.get('/status', (req, res) => {
   }
 });
 
-// GET /error endpoint
+/**
+ * GET /error
+ * Endpoint: Demonstrates error handling by intentionally throwing an error.
+ * Method: GET
+ * Route: /error
+ * Parameters: None
+ * Response: 500 - JSON error object with error message "Something went wrong"
+ * Error Handling: Catches thrown error and returns 500 status with error details
+ */
 app.get('/error', (req, res) => {
   try {
     throw new Error('Something went wrong');
@@ -38,7 +62,15 @@ app.get('/error', (req, res) => {
   }
 });
 
-// GET /email-list endpoint
+/**
+ * GET /email-list
+ * Endpoint: Retrieves all agent email addresses from the agents array.
+ * Method: GET
+ * Route: /email-list
+ * Parameters: None
+ * Response: 200 - Plain text string with comma-separated email addresses (no spaces)
+ * Error Handling: Returns 500 with JSON error object on failure
+ */
 app.get('/email-list', (req, res) => {
   try {
     const emailList = agents.map(agent => agent.email).join(',');
@@ -48,7 +80,15 @@ app.get('/email-list', (req, res) => {
   }
 });
 
-// GET /region-avg endpoint
+/**
+ * GET /region-avg
+ * Endpoint: Calculates average rating and fee for agents in a specified region.
+ * Method: GET
+ * Route: /region-avg
+ * Parameters: Query param 'region' (string, case-insensitive)
+ * Response: 200 - JSON object with region, avg_rating, and avg_fee; or message if no agents found
+ * Error Handling: Returns 500 with JSON error object on failure
+ */
 app.get('/region-avg', (req, res) => {
   try {
     const region = req.query.region;
@@ -64,7 +104,15 @@ app.get('/region-avg', (req, res) => {
   }
 });
 
-// GET /calc-residential endpoint
+/**
+ * GET /calc-residential
+ * Endpoint: Calculates the number of elevators required and total cost for a residential building.
+ * Method: GET
+ * Route: /calc-residential
+ * Parameters: Query params - number_of_apartments (integer > 0), number_of_floors (integer > 0), tier (standard|premium|excelium)
+ * Response: 200 - JSON object with elevators_required and total_cost; 400 - JSON error for validation failures
+ * Error Handling: Returns 500 with JSON error object on failure; returns 400 for invalid tier or non-integer inputs
+ */
 app.get('/calc-residential', (req, res) => {
   try {
     const { number_of_apartments, number_of_floors, tier } = req.query;
@@ -93,7 +141,15 @@ app.get('/calc-residential', (req, res) => {
   }
 });
 
-// POST /contact-us endpoint
+/**
+ * POST /contact-us
+ * Endpoint: Accepts contact form submission and returns confirmation message.
+ * Method: POST
+ * Route: /contact-us
+ * Parameters: Request body - first_name (string), last_name (string), message (string)
+ * Response: 200 - JSON object with message containing sender's full name; logs response to console
+ * Error Handling: Returns 500 with JSON error object on failure
+ */
 app.post('/contact-us', (req, res) => {
   try {
     const { first_name, last_name, message } = req.body;
