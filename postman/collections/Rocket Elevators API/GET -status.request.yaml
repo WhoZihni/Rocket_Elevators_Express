@@ -1,0 +1,6 @@
+$kind: http-request
+name: GET /status
+description: Returns the current server status including port and environment name.
+url: http://localhost:3000/status
+method: GET
+order: 2000

@@ -1,0 +1,6 @@
+$kind: http-request
+name: GET /error
+description: Demonstrates error handling by intentionally throwing an error.
+url: http://localhost:3000/error
+method: GET
+order: 3000

@@ -1,0 +1,8 @@
+$kind: http-request
+name: GET /region-avg
+description: Calculates average rating and fee for agents in a specified region.
+url: http://localhost:3000/region-avg?region=north
+method: GET
+queryParams:
+  region: north
+order: 5000

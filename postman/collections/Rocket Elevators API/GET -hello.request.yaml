@@ -1,0 +1,6 @@
+$kind: http-request
+name: GET /hello
+description: Returns a simple greeting message and logs the port number to console.
+url: http://localhost:3000/hello
+method: GET
+order: 1000

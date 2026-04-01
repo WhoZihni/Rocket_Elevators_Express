@@ -1,0 +1,16 @@
+$kind: http-request
+name: POST /contact-us
+description: Accepts contact form submission and returns confirmation message.
+url: http://localhost:3000/contact-us
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: text
+  content: |-
+    {
+      "first_name": "John",
+      "last_name": "Doe",
+      "message": "Hello!"
+    }
+order: 7000
