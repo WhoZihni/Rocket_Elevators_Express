@@ -137,7 +137,11 @@ app.get('/calc-residential', (req, res) => {
     }
 
     const result = calcResidential(Number(number_of_apartments), Number(number_of_floors), tier);
-    return res.status(200).json(result);
+    const formattedResult = {
+      elevators_required: result.elevators_required,
+      total_cost: new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(result.total_cost)
+    };
+    return res.status(200).json(formattedResult);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
