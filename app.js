@@ -56,7 +56,8 @@ app.get('/region-avg', (req, res) => {
       return res.status(200).json({ message: "No agents found in this region." });
     }
     const avg_rating = parseFloat((filtered.reduce((sum, a) => sum + a.rating, 0) / filtered.length).toFixed(2));
-    const avg_fee = parseFloat((filtered.reduce((sum, a) => sum + a.fee, 0) / filtered.length).toFixed(2));
+    const avg_fee_value = parseFloat((filtered.reduce((sum, a) => sum + a.fee, 0) / filtered.length).toFixed(2));
+    const avg_fee = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(avg_fee_value);
     return res.status(200).json({ region, avg_rating, avg_fee });
   } catch (error) {
     res.status(500).json({ error: error.message });
