@@ -1,10 +1,10 @@
-const http = require('http');
+const https = require('https');
 
 function fetchAgents() {
   return new Promise((resolve, reject) => {
-    const url = 'http://99.79.77.144:3000/api/agents';
+    const url = 'https://raw.githubusercontent.com/cbxxacademy/rocket-agents/refs/heads/main/agents.json';
     
-    http.get(url, (res) => {
+    https.get(url, (res) => {
       let data = '';
       
       res.on('data', (chunk) => {
@@ -15,7 +15,7 @@ function fetchAgents() {
         try {
           const agents = JSON.parse(data);
           
-          // Add id field and convert rating and fee to numbers
+          // Convert rating and fee to numbers
           const cleanedAgents = agents.map((agent, index) => {
             return {
               id: index + 1,
