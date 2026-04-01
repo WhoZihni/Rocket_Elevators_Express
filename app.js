@@ -33,6 +33,7 @@ app.get('/error', (req, res) => {
   try {
     throw new Error('Something went wrong');
   } catch (error) {
+    console.error(error);
     res.status(500).json({ error: error.message });
   }
 });
@@ -61,6 +62,25 @@ app.get('/region-avg', (req, res) => {
     return res.status(200).json({ region, avg_rating, avg_fee });
   } catch (error) {
     res.status(500).json({ error: error.message });
+  }
+});
+
+// POST /contact-us endpoint
+app.post('/contact-us', (req, res) => {
+  try {
+    const { first_name, last_name, message } = req.body;
+
+    const responseObject = {
+      status: "success",
+      received_from: `${first_name} ${last_name}`,
+      message: message
+    };
+
+    console.log(responseObject);
+    res.status(200).json(responseObject);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal server error" });
   }
 });
 
