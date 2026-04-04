@@ -1,0 +1,180 @@
+{
+  "info": {
+    "_postman_id": "rocket-elevators-api-collection",
+    "name": "Rocket Elevators API",
+    "description": "Collection for testing all 7 endpoints of the Rocket Elevators Express API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "GET /hello",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/hello",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "hello"
+          ]
+        },
+        "description": "Returns a simple greeting message and logs the port number to console."
+      },
+      "response": []
+    },
+    {
+      "name": "GET /status",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/status",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "status"
+          ]
+        },
+        "description": "Returns the current server status including port and environment name."
+      },
+      "response": []
+    },
+    {
+      "name": "GET /error",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/error",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "error"
+          ]
+        },
+        "description": "Demonstrates error handling by intentionally throwing an error."
+      },
+      "response": []
+    },
+    {
+      "name": "GET /email-list",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/email-list",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "email-list"
+          ]
+        },
+        "description": "Retrieves all agent email addresses from the agents array as a comma-separated string."
+      },
+      "response": []
+    },
+    {
+      "name": "GET /region-avg",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/region-avg?region=north",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "region-avg"
+          ],
+          "query": [
+            {
+              "key": "region",
+              "value": "north"
+            }
+          ]
+        },
+        "description": "Calculates average rating and fee for agents in a specified region."
+      },
+      "response": []
+    },
+    {
+      "name": "GET /calc-residential",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/calc-residential?number_of_apartments=120&number_of_floors=15&tier=premium",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "calc-residential"
+          ],
+          "query": [
+            {
+              "key": "number_of_apartments",
+              "value": "120"
+            },
+            {
+              "key": "number_of_floors",
+              "value": "15"
+            },
+            {
+              "key": "tier",
+              "value": "premium"
+            }
+          ]
+        },
+        "description": "Calculates the number of elevators required and total cost for a residential building."
+      },
+      "response": []
+    },
+    {
+      "name": "POST /contact-us",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"first_name\": \"John\",\n  \"last_name\": \"Doe\",\n  \"message\": \"Hello!\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/contact-us",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "contact-us"
+          ]
+        },
+        "description": "Accepts contact form submission and returns confirmation message."
+      },
+      "response": []
+    }
+  ]
+}

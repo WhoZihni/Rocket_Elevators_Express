@@ -1,0 +1,11 @@
+$kind: http-request
+name: GET /calc-residential
+description: Calculates the number of elevators required and total cost for a
+  residential building.
+url: http://localhost:3000/calc-residential?number_of_apartments=120&number_of_floors=15&tier=premium
+method: GET
+queryParams:
+  number_of_apartments: "120"
+  number_of_floors: "15"
+  tier: premium
+order: 6000

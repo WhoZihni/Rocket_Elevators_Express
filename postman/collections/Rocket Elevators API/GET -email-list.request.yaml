@@ -1,0 +1,7 @@
+$kind: http-request
+name: GET /email-list
+description: Retrieves all agent email addresses from the agents array as a
+  comma-separated string.
+url: http://localhost:3000/email-list
+method: GET
+order: 4000

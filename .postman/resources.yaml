@@ -1,6 +1,9 @@
 # Use this workspace to collaborate
 workspace:
   id: f93792c6-3adc-421b-8f0f-67c14210024a
+cloudResources:
+  collections:
+    ../postman/collections/Rocket Elevators API: ea3d084c-2aa8-4b59-bedb-6a625391f0f8
 
 # All resources in the `postman/` folder are automatically registered in Local View.
 # Point to additional files outside the `postman/` folder to register them individually. Example:
